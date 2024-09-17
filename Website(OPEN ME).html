@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LOADING SCREEN!!!!</title> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="16x16" href="properties/FAVICON/favicon.ico">
+    <script>
+      //this code here is the amount of time until it redirects you from the loading screen page to the homepage which is 3 seconds
+        setTimeout(function(){
+            window.location.href = "properties/homepage.html";
+          }, 3000);   
+          //this code here shows the progress until the loading bar is filled
+          function updateProgressBar(progress) {
+              document.querySelector('#loading-progress').style.width = `${progress}%`;
+            }
+            let progress = 0;
+            const duration = 2000; 
+            const step = 100 / (duration / 30); 
+            const intervalId = setInterval(() => {
+              progress += step;
+              if (progress > 100) {
+                progress = 100;
+              }
+              updateProgressBar(progress);
+              if (progress === 100) {
+                clearInterval(intervalId);
+                setTimeout(() => {
+                  document.querySelector('#loading-screen').remove();   
+                }, duration);
+              }
+            }, 30);  
+    </script>
+    <style>
+/*the loading style */	
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-color: #000;
+  font-family: Arial, sans-serif;
+
+}
+
+/* the style of the loading bar */
+#loading-bar {
+  width: 50%;
+  height: 1rem;
+  background-color: #333;
+  border-radius: 0.5rem;
+  position: relative;
+
+}
+/* how long the animation will stay and more style of the loading bar */
+#loading-progress {
+  height: 100%;
+  background-color: aqua;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-name: progress;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation: loading-progress 2s;
+}
+/* the animation of the loading-progress element */
+@keyframes loading-progress {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 50%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+          /* this element contains the background of the page and the way it is displayed */
+        #loading {
+            background-image: url("properties/images/waterbg.GIF.gif");
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+          /* this element is for the logo that spins 360 degs on the page */
+        #loading img {
+            animation: spin 1.2s linear infinite;
+            max-width: 50%;
+        }
+       /* this is the animation for the logo to spin 360deg */
+        @keyframes spin {
+            100% {
+             transform: rotate(0deg);
+            }
+            100% {
+            transform: rotate(360deg);
+          }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+  <!--this code is for the logo-->
+        <img src="properties/images/logo.png" alt="Loading...">
+		<div id="loading-bar">
+        <div id="loading-progress"></div>
+    </div>
+</body>
+</html>
+
